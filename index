@@ -1,0 +1,841 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Michael Liao | IT Modernization, Security & Governance</title>
+  <meta name="description" content="Michael Liao — IT modernization, cybersecurity, BCP/DR, governance, and outsourcing. Selected case study: enterprise network, security, server & ERP refresh with measurable business impact." />
+
+  <style>
+    :root{
+      /* Warm-tech palette (light) */
+      --bg: #ffffff;
+      --bg2:#fff7f0;
+      --card:#ffffff;
+      --text:#111827;
+      --muted:#4b5563;
+      --border: rgba(17,24,39,.10);
+      --shadow: 0 18px 55px rgba(17,24,39,.10);
+
+      --accent:#ff6a3d;     /* warm coral */
+      --accent2:#ffb020;    /* amber */
+      --accent3:#ff3d7f;    /* pink-magenta hint */
+      --accentSoft: rgba(255,106,61,.14);
+
+      --radius: 18px;
+      --max: 1120px;
+
+      --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      --sans: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+    }
+
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font-family:var(--sans);
+      color:var(--text);
+      background:
+        radial-gradient(900px 520px at 15% 0%, rgba(255,106,61,.22), transparent 60%),
+        radial-gradient(760px 480px at 85% 12%, rgba(255,176,32,.18), transparent 60%),
+        radial-gradient(820px 520px at 55% 25%, rgba(255,61,127,.10), transparent 60%),
+        linear-gradient(180deg, var(--bg), var(--bg2));
+      min-height:100vh;
+    }
+
+    a{color:inherit; text-decoration:none}
+    a:hover{text-decoration:underline}
+    .container{max-width:var(--max); margin:0 auto; padding:0 20px}
+
+    .skip-link{
+      position:absolute; left:-999px; top:10px;
+      background:var(--card); border:1px solid var(--border);
+      padding:10px 14px; border-radius:12px;
+    }
+    .skip-link:focus{left:10px; z-index:9999}
+
+    /* Header */
+    .site-header{
+      position:sticky; top:0; z-index:50;
+      backdrop-filter: blur(10px);
+      background: color-mix(in srgb, #ffffff 85%, transparent);
+      border-bottom:1px solid var(--border);
+    }
+    .header-inner{
+      display:flex; align-items:center; justify-content:space-between;
+      padding:14px 0;
+      gap:14px;
+    }
+    .brand{display:flex; align-items:center; gap:12px; min-width: 240px}
+    .logo-wrap{
+      width:44px; height:44px; border-radius:16px;
+      border:1px solid var(--border);
+      background:
+        linear-gradient(135deg, rgba(255,106,61,.18), rgba(255,176,32,.16));
+      display:grid; place-items:center;
+      overflow:hidden;
+      box-shadow: var(--shadow);
+    }
+    .logo-wrap img{width:100%; height:100%; object-fit:contain; padding:6px}
+    .brand-text{display:flex; flex-direction:column}
+    .brand-name{font-weight:850; letter-spacing:.2px}
+    .brand-role{font-size:13px; color:var(--muted)}
+
+    .nav{
+      display:flex; align-items:center; gap:10px; flex-wrap:wrap;
+      justify-content:flex-end;
+    }
+    .nav a{
+      font-size:14px;
+      color:var(--muted);
+      padding:10px 12px;
+      border-radius:14px;
+      border:1px solid transparent;
+    }
+    .nav a:hover{
+      text-decoration:none;
+      color:var(--text);
+      border-color: var(--border);
+      background: color-mix(in srgb, #fff 80%, transparent);
+    }
+    .nav a.active{
+      color:var(--text);
+      border-color: color-mix(in srgb, var(--accent) 55%, var(--border));
+      background: linear-gradient(135deg, rgba(255,106,61,.12), rgba(255,176,32,.12));
+    }
+    .nav .cta{
+      font-weight:750;
+      color:var(--text);
+      border:1px solid color-mix(in srgb, var(--accent) 45%, var(--border));
+      background: linear-gradient(135deg, rgba(255,106,61,.18), rgba(255,176,32,.16));
+    }
+
+    /* Layout helpers */
+    .section{padding:54px 0}
+    .section.alt{
+      background: color-mix(in srgb, #ffffff 78%, rgba(255,176,32,.06));
+      border-top:1px solid var(--border);
+      border-bottom:1px solid var(--border);
+    }
+    .section-head{
+      display:flex; align-items:flex-end; justify-content:space-between;
+      gap:14px; margin-bottom:16px;
+    }
+    .section-head h2{margin:0; font-size:26px}
+    .muted{color:var(--muted)}
+    .small{font-size:12px}
+    .pill{
+      display:inline-flex; gap:8px; align-items:center;
+      padding:8px 12px;
+      border-radius:999px;
+      border:1px solid var(--border);
+      background: color-mix(in srgb, #fff 85%, transparent);
+      color:var(--muted);
+      font-size:13px;
+    }
+    .pill .dot{
+      width:8px; height:8px; border-radius:999px;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      box-shadow: 0 0 0 6px rgba(255,106,61,.08);
+    }
+
+    /* Cards & buttons */
+    .card{
+      border:1px solid var(--border);
+      background: color-mix(in srgb, #fff 92%, transparent);
+      border-radius: var(--radius);
+      padding:16px;
+      box-shadow: var(--shadow);
+    }
+    .btn{
+      display:inline-flex; align-items:center; justify-content:center;
+      padding:12px 14px;
+      border-radius:14px;
+      border:1px solid var(--border);
+      background: color-mix(in srgb, #fff 88%, transparent);
+      color:var(--text);
+      cursor:pointer;
+      font-weight:750;
+      gap:10px;
+    }
+    .btn:hover{transform: translateY(-1px); text-decoration:none}
+    .btn.primary{
+      border:1px solid color-mix(in srgb, var(--accent) 55%, var(--border));
+      background: linear-gradient(135deg, rgba(255,106,61,.20), rgba(255,176,32,.18));
+    }
+    .btn .kbd{
+      font-family:var(--mono);
+      font-size:12px;
+      padding:4px 8px;
+      border-radius:10px;
+      border:1px solid var(--border);
+      background: rgba(255,255,255,.8);
+      color:var(--muted);
+    }
+
+    /* Pages */
+    .page{display:none}
+    .page.active{display:block}
+
+    /* Hero */
+    .hero{padding:62px 0 20px}
+    .hero-grid{
+      display:grid;
+      grid-template-columns: 1.35fr 1fr;
+      gap:18px;
+      align-items:stretch;
+    }
+    h1{
+      font-size:46px; line-height:1.06;
+      margin:14px 0 12px;
+      letter-spacing:-0.6px;
+    }
+    .lead{font-size:18px; color:var(--muted); line-height:1.7; margin:0 0 14px}
+    .hero-actions{display:flex; gap:12px; margin:18px 0 14px; flex-wrap:wrap}
+
+    .meta{
+      display:grid;
+      grid-template-columns: 1fr;
+      gap:10px;
+      margin-top:10px;
+    }
+    .meta-item{display:flex; gap:12px; align-items:center; flex-wrap:wrap}
+    .meta-k{width:92px; color:var(--muted); font-size:13px}
+    .meta-v{font-size:14px}
+    .sep{opacity:.6; margin:0 6px}
+
+    .profile{
+      display:flex; gap:14px; align-items:center;
+      padding:16px;
+    }
+    .avatar{
+      width:72px; height:72px; border-radius:20px;
+      border:1px solid var(--border);
+      background:
+        radial-gradient(60px 60px at 30% 30%, rgba(255,106,61,.22), transparent 70%),
+        radial-gradient(70px 70px at 70% 40%, rgba(255,176,32,.18), transparent 70%),
+        linear-gradient(135deg, rgba(17,24,39,.03), rgba(17,24,39,.01));
+      display:grid; place-items:center;
+      overflow:hidden;
+      flex: 0 0 auto;
+    }
+    .avatar img{width:100%; height:100%; object-fit:cover}
+    .avatar .placeholder{
+      font-family:var(--mono);
+      font-weight:800;
+      color:rgba(17,24,39,.55);
+      font-size:18px;
+    }
+
+    .highlights ul{margin:0; padding-left:18px; color:var(--muted); line-height:1.75}
+    .stat-grid{
+      margin-top:14px;
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap:10px;
+    }
+    .stat{
+      border:1px solid var(--border);
+      background: color-mix(in srgb, #fff 85%, transparent);
+      border-radius:16px;
+      padding:12px;
+    }
+    .stat-num{font-size:20px; font-weight:900}
+    .stat-label{font-size:12px; color:var(--muted); margin-top:4px}
+
+    /* Services */
+    .grid-3{
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap:12px;
+    }
+    .service h3{margin:0 0 8px}
+    .service p{margin:0; color:var(--muted); line-height:1.65}
+    .service .chiprow{margin-top:10px; display:flex; gap:8px; flex-wrap:wrap}
+    .chip{
+      font-size:12px;
+      padding:7px 10px;
+      border-radius:999px;
+      border:1px solid var(--border);
+      color:var(--muted);
+      background: color-mix(in srgb, #fff 90%, transparent);
+    }
+
+    /* Case list */
+    .case-card h3{margin:0 0 6px}
+    .case-card p{margin:0; color:var(--muted); line-height:1.65}
+    .case-top{
+      display:flex; align-items:flex-start; justify-content:space-between;
+      gap:12px; flex-wrap:wrap;
+    }
+    .impact{
+      margin-top:14px;
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap:10px;
+    }
+    .impact-item{
+      border:1px solid var(--border);
+      background: color-mix(in srgb, #fff 86%, transparent);
+      border-radius:16px;
+      padding:12px;
+    }
+    .impact-k{font-size:12px; color:var(--muted)}
+    .impact-v{margin-top:6px; font-weight:750}
+
+    /* Case detail */
+    .two-col{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap:12px;
+      align-items:start;
+    }
+    .bullets{margin:0; padding-left:18px; color:var(--muted); line-height:1.75}
+    .callout{
+      margin-top:12px;
+      padding:14px;
+      border-radius:16px;
+      border:1px dashed var(--border);
+      background: linear-gradient(135deg, rgba(255,106,61,.08), rgba(255,176,32,.08));
+      color:var(--muted);
+    }
+
+    /* Contact form */
+    .contact-wrap{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap:14px;
+      align-items:start;
+    }
+    label{display:block; font-size:13px; color:var(--muted); margin-bottom:10px}
+    input, textarea{
+      width:100%;
+      margin-top:6px;
+      border-radius:14px;
+      border:1px solid var(--border);
+      background: color-mix(in srgb, #fff 92%, transparent);
+      color:var(--text);
+      padding:12px 12px;
+      outline:none;
+    }
+    input:focus, textarea:focus{border-color: color-mix(in srgb, var(--accent) 55%, var(--border))}
+    .form-note{margin:10px 0 0}
+
+    /* Footer */
+    .site-footer{padding:18px 0}
+    .footer-inner{
+      display:flex; align-items:center; justify-content:space-between; gap:12px;
+      border-top:1px solid var(--border);
+      padding-top:14px;
+    }
+
+    /* Reveal animation */
+    [data-reveal]{opacity:0; transform: translateY(12px); transition: all .6s ease}
+    [data-reveal].is-visible{opacity:1; transform:none}
+
+    /* Responsive */
+    @media (max-width: 940px){
+      h1{font-size:38px}
+      .hero-grid{grid-template-columns: 1fr}
+      .grid-3{grid-template-columns: 1fr}
+      .impact{grid-template-columns: 1fr}
+      .two-col{grid-template-columns: 1fr}
+      .contact-wrap{grid-template-columns: 1fr}
+      .brand{min-width:auto}
+    }
+  </style>
+</head>
+
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header" id="top">
+    <div class="container header-inner">
+      <div class="brand">
+        <!-- Logo: put your logo file next to this HTML and update the filename below if needed -->
+        <div class="logo-wrap" title="Logo">
+          <img src="mikes-tech-logo.png" alt="Mike’s Tech logo" onerror="this.style.display='none'" />
+        </div>
+        <div class="brand-text">
+          <div class="brand-name">Michael Liao</div>
+          <div class="brand-role">IT Modernization • Cybersecurity • Governance</div>
+        </div>
+      </div>
+
+      <nav class="nav" aria-label="Primary">
+        <a href="#/home" data-route="home">Home</a>
+        <a href="#/case-studies" data-route="case-studies">Case Studies</a>
+        <a href="#/about" data-route="about">About</a>
+        <a href="#/contact" data-route="contact" class="cta">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <!-- HOME -->
+    <section class="page active" id="page-home" aria-label="Home page">
+      <section class="hero">
+        <div class="container hero-grid">
+          <div>
+            <p class="pill"><span class="dot" aria-hidden="true"></span> Business-ready IT, designed for stability and growth</p>
+            <h1>Secure, governed IT that keeps your business running smoothly.</h1>
+            <p class="lead">
+              I’m Michael Liao—an IT outsourcing owner focused on modernizing infrastructure, improving cybersecurity,
+              strengthening continuity (BCP/DR), and setting governance foundations that scale.
+            </p>
+
+            <div class="hero-actions">
+              <a class="btn primary" href="#/case-studies">View case study <span class="kbd">↵</span></a>
+              <a class="btn" href="mailto:mike.liao@mikestechtw.com">Email me</a>
+            </div>
+
+            <div class="meta">
+              <div class="meta-item">
+                <span class="meta-k">Email</span>
+                <span class="meta-v"><a href="mailto:mike.liao@mikestechtw.com">mike.liao@mikestechtw.com</a></span>
+              </div>
+              <div class="meta-item">
+                <span class="meta-k">English</span>
+                <span class="meta-v">Professional working proficiency</span>
+              </div>
+              <div class="meta-item">
+                <span class="meta-k">Keywords</span>
+                <span class="meta-v">
+                  Cybersecurity <span class="sep">•</span> BCP/DR <span class="sep">•</span> IT Governance
+                  <span class="sep">•</span> IT Outsourcing <span class="sep">•</span> Device Procurement
+                </span>
+              </div>
+            </div>
+          </div>
+
+          <div class="card highlights">
+            <div class="profile">
+              <div class="avatar" aria-label="Profile photo placeholder">
+                <!-- When you provide photos, we will replace this with your chosen headshot -->
+                <div class="placeholder">ML</div>
+              </div>
+              <div>
+                <div style="font-weight:900; font-size:18px;">Michael Liao</div>
+                <div class="muted" style="margin-top:4px; line-height:1.5;">
+                  Owner • IT Outsourcing Partner<br/>
+                  Modernization • Security • Governance
+                </div>
+              </div>
+            </div>
+
+            <h2 style="margin:6px 0 10px; font-size:18px;">What I deliver</h2>
+            <ul>
+              <li>Infrastructure refresh: network, endpoints, servers</li>
+              <li>Security: UTM, policies, hardening, risk reduction</li>
+              <li>Continuity: BCP/DR readiness & operational resilience</li>
+              <li>Governance: practical standards & maintainable processes</li>
+            </ul>
+
+            <div class="stat-grid" aria-label="Selected impact stats">
+              <div class="stat">
+                <div class="stat-num">30%+</div>
+                <div class="stat-label">Efficiency improvement</div>
+              </div>
+              <div class="stat">
+                <div class="stat-num">15%</div>
+                <div class="stat-label">Labor cost saved</div>
+              </div>
+              <div class="stat">
+                <div class="stat-num">0</div>
+                <div class="stat-label">Attack incidents (reported)</div>
+              </div>
+            </div>
+
+            <p class="small muted" style="margin:12px 0 0;">
+              Metrics shown from a public-ready case study (2024).
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section class="section alt">
+        <div class="container">
+          <div class="section-head">
+            <h2>Core services</h2>
+            <p class="muted">A practical scope aligned to business outcomes.</p>
+          </div>
+
+          <div class="grid-3" data-reveal>
+            <div class="card service">
+              <h3>Cybersecurity</h3>
+              <p>UTM deployment, custom policy design, segmentation, and baseline hardening to reduce risk.</p>
+              <div class="chiprow">
+                <span class="chip">FortiGate UTM</span>
+                <span class="chip">Policy</span>
+                <span class="chip">Hardening</span>
+              </div>
+            </div>
+
+            <div class="card service">
+              <h3>BCP / DR</h3>
+              <p>Continuity planning foundations, backup strategy, recovery expectations, and documentation.</p>
+              <div class="chiprow">
+                <span class="chip">Backups</span>
+                <span class="chip">Recovery</span>
+                <span class="chip">Runbook</span>
+              </div>
+            </div>
+
+            <div class="card service">
+              <h3>IT Governance</h3>
+              <p>Lightweight standards that teams can maintain: access control, change basics, and inventory practices.</p>
+              <div class="chiprow">
+                <span class="chip">Standards</span>
+                <span class="chip">Process</span>
+                <span class="chip">Documentation</span>
+              </div>
+            </div>
+
+            <div class="card service">
+              <h3>IT Outsourcing</h3>
+              <p>Act as a long-term IT partner—assess, plan, deliver, and maintain business-critical systems.</p>
+              <div class="chiprow">
+                <span class="chip">Assessment</span>
+                <span class="chip">Delivery</span>
+                <span class="chip">Maintenance</span>
+              </div>
+            </div>
+
+            <div class="card service">
+              <h3>Device Procurement</h3>
+              <p>Refresh aging endpoints with a practical replacement plan aligned to roles and workloads.</p>
+              <div class="chiprow">
+                <span class="chip">PC Refresh</span>
+                <span class="chip">Lifecycle</span>
+                <span class="chip">Deployment</span>
+              </div>
+            </div>
+
+            <div class="card service">
+              <h3>Network Modernization</h3>
+              <p>Stabilize wired & Wi-Fi environments with a clean architecture and performance tuning.</p>
+              <div class="chiprow">
+                <span class="chip">Switch Refresh</span>
+                <span class="chip">Aruba Wi-Fi</span>
+                <span class="chip">Roaming</span>
+              </div>
+            </div>
+          </div>
+
+          <div style="margin-top:14px;">
+            <a class="btn primary" href="#/case-studies">See the 2024 case study →</a>
+          </div>
+        </div>
+      </section>
+    </section>
+
+    <!-- CASE STUDIES LIST -->
+    <section class="page" id="page-case-studies" aria-label="Case studies page">
+      <section class="section">
+        <div class="container">
+          <div class="section-head">
+            <h2>Case Studies</h2>
+            <p class="muted">Public-ready examples. More will be added.</p>
+          </div>
+
+          <article class="card case-card" data-reveal>
+            <div class="case-top">
+              <div>
+                <h3>Manufacturing Factory — Full IT & ERP Modernization (2024)</h3>
+                <p>
+                  Scope: endpoint refresh, wired/wireless network restructure, firewall upgrade,
+                  server replacement, and ERP modernization.
+                </p>
+                <p class="small muted" style="margin-top:8px;">
+                  Scale: ~65 employees • Wi-Fi coverage ~2000 m² • Delivered progressively across 2024
+                </p>
+              </div>
+
+              <div style="display:flex; gap:10px; flex-wrap:wrap;">
+                <a class="btn primary" href="#/case-funda">Open case study</a>
+                <a class="btn" href="mailto:mike.liao@mikestechtw.com?subject=Case%20Study%20Inquiry">Ask about similar work</a>
+              </div>
+            </div>
+
+            <div class="impact">
+              <div class="impact-item">
+                <div class="impact-k">Reliability</div>
+                <div class="impact-v">Network instability eliminated</div>
+              </div>
+              <div class="impact-item">
+                <div class="impact-k">Security</div>
+                <div class="impact-v">External attack incidents eliminated</div>
+              </div>
+              <div class="impact-item">
+                <div class="impact-k">Business</div>
+                <div class="impact-v"><strong>30%+ efficiency</strong> and <strong>15% labor cost saved</strong></div>
+              </div>
+            </div>
+          </article>
+        </div>
+      </section>
+    </section>
+
+    <!-- CASE STUDY DETAIL -->
+    <section class="page" id="page-case-funda" aria-label="Case study detail page">
+      <section class="section">
+        <div class="container">
+          <div class="section-head">
+            <h2>Case Study: Full IT & ERP Modernization (2024)</h2>
+            <p class="muted">Manufacturing factory • Progressive rollout across 2024</p>
+          </div>
+
+          <div class="two-col" data-reveal>
+            <div class="card">
+              <h3 style="margin:0 0 10px;">Context</h3>
+              <ul class="bullets">
+                <li><strong>Role:</strong> Outsourced IT vendor (Owner)</li>
+                <li><strong>Scale:</strong> ~65 employees</li>
+                <li><strong>Wi-Fi coverage:</strong> ~2000 m²</li>
+                <li><strong>Timeline:</strong> Progressive modernization across 2024</li>
+              </ul>
+
+              <div class="callout">
+                <strong>Goal:</strong> Remove instability and legacy bottlenecks while improving security and operational efficiency.
+              </div>
+            </div>
+
+            <div class="card">
+              <h3 style="margin:0 0 10px;">Tech & components</h3>
+              <ul class="bullets">
+                <li>Wired network restructure (switch replacement)</li>
+                <li>Wi-Fi roaming upgrade using Aruba</li>
+                <li>Firewall upgrade to FortiGate UTM + custom policy design</li>
+                <li>Server replacement + ERP modernization with Ragic</li>
+                <li>Endpoint health check and phased PC refresh</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="two-col" style="margin-top:12px;" data-reveal>
+            <div class="card">
+              <h3 style="margin:0 0 10px;">Problem</h3>
+              <ul class="bullets">
+                <li>Unstable wired and wireless network environment</li>
+                <li>Aging PCs leading to low productivity</li>
+                <li>Legacy firewall with insufficient protection</li>
+                <li>Old server and outdated ERP slowing operations</li>
+              </ul>
+            </div>
+
+            <div class="card">
+              <h3 style="margin:0 0 10px;">Approach</h3>
+              <ul class="bullets">
+                <li>Company-wide network assessment and architecture redesign</li>
+                <li>Switch replacement and Wi-Fi roaming upgrade (Aruba)</li>
+                <li>PC health checks and replacement roadmap</li>
+                <li>FortiGate UTM migration with customized policies</li>
+                <li>Server replacement and Ragic ERP implementation</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="card" style="margin-top:12px;" data-reveal>
+            <h3 style="margin:0 0 10px;">Results</h3>
+            <div class="impact">
+              <div class="impact-item">
+                <div class="impact-k">Reliability</div>
+                <div class="impact-v">Network instability issues eliminated</div>
+              </div>
+              <div class="impact-item">
+                <div class="impact-k">Security</div>
+                <div class="impact-v">External attack incidents eliminated</div>
+              </div>
+              <div class="impact-item">
+                <div class="impact-k">Business</div>
+                <div class="impact-v"><strong>30%+ efficiency</strong> • Overtime reduced • <strong>15% labor cost saved</strong></div>
+              </div>
+            </div>
+
+            <div class="callout">
+              <strong>Takeaway:</strong> Combining infrastructure stability, security policy hardening, and ERP modernization
+              created direct operational impact—not only fewer IT issues, but measurable productivity gains.
+            </div>
+
+            <div style="margin-top:12px; display:flex; gap:10px; flex-wrap:wrap;">
+              <a class="btn" href="#/case-studies">← Back to case studies</a>
+              <a class="btn primary" href="mailto:mike.liao@mikestechtw.com?subject=Similar%20Modernization%20Project">Contact about a similar project</a>
+            </div>
+          </div>
+        </div>
+      </section>
+    </section>
+
+    <!-- ABOUT -->
+    <section class="page" id="page-about" aria-label="About page">
+      <section class="section">
+        <div class="container">
+          <div class="section-head">
+            <h2>About Michael</h2>
+            <p class="muted">Business-first IT modernization and security.</p>
+          </div>
+
+          <div class="two-col" data-reveal>
+            <div class="card">
+              <h3 style="margin:0 0 10px;">Positioning</h3>
+              <p style="margin:0; color:var(--muted); line-height:1.75;">
+                I help organizations modernize legacy IT into reliable, secure systems—prioritizing continuity and maintainable governance.
+                My focus is practical execution: assess the environment, deliver upgrades with minimal disruption, and leave behind clear,
+                usable documentation and handover.
+              </p>
+              <div class="callout">
+                <strong>Specialties:</strong> Cybersecurity • BCP/DR • IT Governance • IT Outsourcing • Device Procurement
+              </div>
+            </div>
+
+            <div class="card">
+              <h3 style="margin:0 0 10px;">How I work</h3>
+              <ul class="bullets">
+                <li><strong>Assess:</strong> health checks, bottlenecks, risk review</li>
+                <li><strong>Plan:</strong> phased roadmap aligned to business priorities</li>
+                <li><strong>Deliver:</strong> controlled rollout with validation</li>
+                <li><strong>Stabilize:</strong> monitoring, policy tuning, and documentation</li>
+              </ul>
+
+              <div style="margin-top:12px;">
+                <a class="btn primary" href="#/contact">Let’s connect →</a>
+              </div>
+            </div>
+          </div>
+
+          <p class="small muted" style="margin-top:12px;">
+            (When you send your headshots, I’ll update this page with the best one and tune the composition.)
+          </p>
+        </div>
+      </section>
+    </section>
+
+    <!-- CONTACT -->
+    <section class="page" id="page-contact" aria-label="Contact page">
+      <section class="section alt">
+        <div class="container">
+          <div class="section-head">
+            <h2>Contact</h2>
+            <p class="muted">For collaboration, speaking, or business introductions.</p>
+          </div>
+
+          <div class="contact-wrap" data-reveal>
+            <div class="card">
+              <h3 style="margin:0 0 10px;">Email</h3>
+              <p class="muted" style="margin:0 0 12px; line-height:1.7;">
+                The fastest way to reach me is email.
+              </p>
+              <a class="btn primary" href="mailto:mike.liao@mikestechtw.com">mike.liao@mikestechtw.com</a>
+
+              <div class="callout">
+                <strong>Tip:</strong> If you’re introducing me in a business setting, feel free to mention the 2024 modernization case study.
+              </div>
+            </div>
+
+            <form class="card" id="contactForm">
+              <h3 style="margin:0 0 10px;">Message (demo)</h3>
+              <label>
+                Name
+                <input name="name" placeholder="Your name" required />
+              </label>
+              <label>
+                Email
+                <input name="email" type="email" placeholder="you@example.com" required />
+              </label>
+              <label>
+                Message
+                <textarea name="message" rows="5" placeholder="What would you like to discuss?" required></textarea>
+              </label>
+              <button class="btn primary" type="submit">Copy message</button>
+              <p class="small muted form-note" id="formNote">No backend yet. This will copy your message to clipboard.</p>
+            </form>
+          </div>
+        </div>
+      </section>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <p class="muted small">© <span id="year"></span> Michael Liao • Single-file HTML (CSS+JS embedded)</p>
+      <a class="small" href="#/home">Back to top ↑</a>
+    </div>
+  </footer>
+
+  <script>
+    // Simple hash router: #/home, #/case-studies, #/case-funda, #/about, #/contact
+    (() => {
+      const routes = new Map([
+        ["home", "page-home"],
+        ["case-studies", "page-case-studies"],
+        ["case-funda", "page-case-funda"],
+        ["about", "page-about"],
+        ["contact", "page-contact"],
+      ]);
+
+      const navLinks = Array.from(document.querySelectorAll(".nav a[data-route]"));
+      const pages = Array.from(document.querySelectorAll(".page"));
+
+      const setActive = (routeKey) => {
+        const pageId = routes.get(routeKey) || routes.get("home");
+
+        pages.forEach(p => p.classList.toggle("active", p.id === pageId));
+        navLinks.forEach(a => a.classList.toggle("active", a.dataset.route === routeKey));
+
+        // Reveal observer refresh on route change
+        requestAnimationFrame(() => {
+          const revealEls = Array.from(document.querySelectorAll(".page.active [data-reveal]"));
+          revealEls.forEach(el => io.observe(el));
+        });
+
+        // Scroll to top for "multi-page feel"
+        window.scrollTo({ top: 0, behavior: "instant" });
+      };
+
+      const getRouteFromHash = () => {
+        const hash = location.hash || "#/home";
+        const m = hash.match(/^#\/([^?#]+)/);
+        return (m?.[1] || "home").toLowerCase();
+      };
+
+      window.addEventListener("hashchange", () => setActive(getRouteFromHash()));
+
+      // Footer year
+      const year = document.getElementById("year");
+      year.textContent = String(new Date().getFullYear());
+
+      // Reveal on scroll
+      const io = new IntersectionObserver((entries) => {
+        for (const entry of entries) {
+          if (entry.isIntersecting) entry.target.classList.add("is-visible");
+        }
+      }, { threshold: 0.12 });
+
+      // Contact form demo: copy to clipboard
+      const form = document.getElementById("contactForm");
+      const note = document.getElementById("formNote");
+
+      form?.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        const fd = new FormData(form);
+        const payload = {
+          name: (fd.get("name") || "").toString().trim(),
+          email: (fd.get("email") || "").toString().trim(),
+          message: (fd.get("message") || "").toString().trim(),
+        };
+        const text = `Name: ${payload.name}\nEmail: ${payload.email}\n\n${payload.message}`;
+        try{
+          await navigator.clipboard.writeText(text);
+          note.textContent = "Copied to clipboard ✅ Now paste into your email client.";
+        } catch {
+          note.textContent = "Clipboard blocked by browser. Please copy manually.";
+        }
+        form.reset();
+      });
+
+      // Initial route
+      setActive(getRouteFromHash());
+    })();
+  </script>
+</body>
+</html>
